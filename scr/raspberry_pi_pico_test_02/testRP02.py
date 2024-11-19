@@ -1,3 +1,5 @@
+# Sử dụng thư viện adafruit-circuitpython-bundle-py-20241116 nhé
+
 import time
 import board
 import usb_midi
@@ -5,9 +7,9 @@ from analogio import AnalogIn
 import adafruit_midi
 from adafruit_midi.control_change import ControlChange
 
-# Cấu hình biến trở trên GP26 (ADC0) và GP27 (ADC1)
-potentiometer1 = AnalogIn(board.A0)  # Biến trở 1
-potentiometer2 = AnalogIn(board.A1)  # Biến trở 2
+# Cấu hình biến trở
+potentiometer1 = AnalogIn(board.A0)
+potentiometer2 = AnalogIn(board.A1)
 
 # Thiết lập MIDI USB
 midi = adafruit_midi.MIDI(midi_out=usb_midi.ports[1], out_channel=0)
