@@ -1,0 +1,4 @@
+@file,1,CircuitPython Audio
+EQHigh,,KnobSlider,,B003,,,,,,,,,Fast;,
+EQLow,,KnobSlider,,B001,,,,,,,,,Fast;,
+EQMid,,KnobSlider,,B002,,,,,,,,,Fast;,
