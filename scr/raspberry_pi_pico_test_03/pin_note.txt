@@ -1,0 +1,23 @@
+Kết nối 74HC4067:
+VCC → 3.3V trên Pico.
+GND → GND trên Pico.
+SIG → GP26 (ADC0).
+S0, S1, S2, S3 → GPIO (GP0, GP1, GP2, GP3).
+EN → GND (luôn kích hoạt).
+
+Kết nối biến trở:
+
+Biến trở 1:
+Một chân ngoài → 3.3V.
+Chân ngoài còn lại → GND.
+Chân giữa (wiper) → Kênh CH0 của 74HC4067.
+
+Biến trở 2:
+Một chân ngoài → 3.3V.
+Chân ngoài còn lại → GND.
+Chân giữa (wiper) → Kênh CH1 của 74HC4067.
+
+Biến trở 3:
+Một chân ngoài → 3.3V.
+Chân ngoài còn lại → GND.
+Chân giữa (wiper) → Kênh CH2 của 74HC4067.
