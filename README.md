@@ -1,3 +1,6 @@
+![Photo01](https://github.com/kysutrung/customize_rekordbox_controller/blob/main/mediaaa/repo_cover.jpg)
+
+
 # DJ Controller for Rekordbox using Raspberry Pi Pico
 
 ## Introduction
