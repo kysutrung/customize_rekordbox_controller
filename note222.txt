@@ -1,0 +1,3 @@
+Thư viện đang sử dụng:
+adafruit-circuitpython-raspberry_pi_pico-en_US-9.2.0.uf2
+adafruit-circuitpython-bundle-py-20241116
