@@ -21,7 +21,7 @@ Dự án hướng tới chế tạo ra một nhạc cụ điện tử điều kh
 - USB cable (to connect the Pico to a computer) | Cáp usb để kết nối với máy tính
 
 This is electrical diagram | Sơ đồ đấu nối các linh kiện:
-![Photo01](https://github.com/kysutrung/customize_rekordbox_controller/blob/main/mediaaa/circuit_image.png)
+![Photo01](https://github.com/kysutrung/customize_rekordbox_controller/blob/main/mediaaa/so_do_noi_day.png)
 
 
 ## Software Requirements | Phần mềm
