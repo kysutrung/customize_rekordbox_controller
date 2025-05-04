@@ -1,0 +1,11 @@
+@file,1,CircuitPython Audio
+ChannelFader,,KnobSlider,,B00A,B009,,,,,,,,,
+EQHigh,,KnobSlider,,B004,B005,,,,,,,,Fast;,
+EQLow,,KnobSlider,,B002,B007,,,,,,,,Fast;,
+EQMid,,KnobSlider,,B003,B006,,,,,,,,Fast;,
+FX1-1,,KnobSlider,B001,,,,,,,,,,,
+FX2-1,,KnobSlider,B008,,,,,,,,,,,
+NoFunction,,KnobSlider,,B000,,,,,,,,,Fast;,
+NoFunction,,KnobSlider,,,B00B,,,,,,,,,
+NoFunction,,Button,,,,,,B006,,,,,,
+NoFunction,,Button,,,,,,,B008,,,,,
