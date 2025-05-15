@@ -30,6 +30,10 @@ This is electrical diagram | Về cơ bản các linh kiện được đấu nh�
 - Rekordbox software from Pioneer | Phần mềm Rekordbox (BẢN QUYỀN)
 
 ## Installation | Hướng dẫn cài đặt
+For MIDI controller with 8 knobs and 2 faders designed by Trung | Hướng dẫn này dành cho phiên bản bàn do Trung làm sẵn với 8 núm xoay và 2 thanh gạt
+
+![Photo01](https://github.com/kysutrung/customize_rekordbox_controller/blob/main/mediaaa/version%202.jpg)
+
 ### 1. Set up CircuitPython Library | Cài thư viện
 1. Copy the uf2 file in folder A to the disk of the brand new Raspberry Pi Pico | Copy file có đuôi uf2 ở folder A vào ổ đĩa của bo Raspberry Pico mới mua từ quán về
 2. Wait for the board to reboot | Đợi mạch khởi động lại
