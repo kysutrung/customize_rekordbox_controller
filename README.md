@@ -30,28 +30,19 @@ This is electrical diagram | Về cơ bản các linh kiện được đấu nh�
 - Rekordbox software from Pioneer | Phần mềm Rekordbox (BẢN QUYỀN)
 
 ## Installation | Hướng dẫn cài đặt
-### 1. Set up CircuitPython on Raspberry Pi Pico
+### 1. Set up CircuitPython Library | Cài thư viện
+1. Copy the uf2 file in folder A to the disk of the brand new Raspberry Pi Pico | Copy file có đuôi uf2 ở folder A vào ổ đĩa của bo Raspberry Pico mới mua từ quán về
+2. Wait for the board to reboot | Đợi mạch khởi động lại
 
-
-### 2. Install Required Libraries
-1. Download the `Adafruit_CircuitPython_MIDI` library from Adafruit | Tải thư viện tên như thế này vềề
-2. Copy the `midi` folder from the downloaded library into the `lib` folder on the Pico | Copy file tên là mide trong thư viện vừa tải vào file tên là lib ở trong ổ đĩa của bo Pico
-
-### 3. Upload the Code
-1. Clone this repository 
-2. Rename final code into `code.py` and copy file into the `CIRCUITPY` drive.
-3. Restart the Pico if needed.
+### 2. Install Program | Nạp code
+1. Delete everything on the Raspberry Pico board's hard drive | Xóa hết các thư mục có trong ổ đĩa của bo Pico
+2. Copy all the files in folder B to the disk of the Raspberry Pi Pico | Copy hết các thư mục có trong folder B vào ổ đĩa của bo Raspberry Pico
 
 ## Usage | Hướng dẫn sử dụng
-1. Connect the Raspberry Pi Pico to your computer via USB.
-2. Open Rekordbox and open MIDI menu.
-3. Map the MIDI controls in Rekordbox to match your hardware layout.
-4. Start mixing and enjoy!
-
-## Customization | Điều chỉnh
-- Modify final_code to adjust button mappings and MIDI messages.
-- Add more controls by expanding the hardware setup.
-- Implement LED feedback for visual cues.
+1. Connect the Raspberry Pi Pico to your computer via USB | Cắm bàn vào máy tính
+2. Open Rekordbox and open MIDI menu | Mở menu MIDI ở RekordBox lên (nó nằm ở trên cùng bên tay phải)
+3. Map the MIDI controls in Rekordbox to match your hardware layout | Gán nút cho bàn
+4. Start mixing and enjoy | Quẩy đê ae ơi
 
 ## Troubleshooting | Sửa lỗi
 - If the Pico is not recognized as a MIDI device, ensure CircuitPython and the MIDI library are installed correctly.
