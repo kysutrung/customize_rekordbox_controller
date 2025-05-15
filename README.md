@@ -15,25 +15,23 @@ Dự án hướng tới chế tạo ra một nhạc cụ điện tử điều kh
 - Compatible with Windows computers | Chạy được với máy tính Windows
 
 ## Hardware Requirements | Phần cứng
-- Raspberry Pi Pico
-- Analog Multiplexer | Bộ chia 16 kênh analog
+- Raspberry Pi Pico | Vi xử lý trung tâm
+- Analog Multiplexer | Bộ chia tạo ra thêm các kênh analog
 - Potentiometers | Biến trở núm xoay hoặc biến trở thanh trượt
 - USB cable (to connect the Pico to a computer) | Cáp usb để kết nối với máy tính
 
-This is electrical diagram | Sơ đồ đấu nối các linh kiện:
+This is electrical diagram | Về cơ bản các linh kiện được đấu như vậy:
 ![Photo01](https://github.com/kysutrung/customize_rekordbox_controller/blob/main/mediaaa/so_do_noi_day.png)
 
 
 ## Software Requirements | Phần mềm
 - [CircuitPython](https://circuitpython.org/) installed on Raspberry Pi Pico
 - [Adafruit MIDI Library](https://github.com/adafruit/Adafruit_CircuitPython_MIDI)
-- Rekordbox software installed on your computer | Phần mềm rekordboxx
+- Rekordbox software from Pioneer | Phần mềm Rekordbox (BẢN QUYỀN)
 
 ## Installation | Hướng dẫn cài đặt
 ### 1. Set up CircuitPython on Raspberry Pi Pico
-1. Download and install CircuitPython for the Raspberry Pi Pico from [CircuitPython Downloads](https://circuitpython.org/board/raspberry_pi_pico/) | Tải trình điều khiển tại đây (kiểm tra file note 222 để biết phiên bản nào cần tải)
-2. Copy the downloaded UF2 file onto the Pico | Copy file vừa tải vào ổ đĩa của bo Pico
-3. Once installed, the Pico will appear as a USB drive named `CIRCUITPY` | Copy xong thì sẽ hiện thêm ổ đĩa tên là CIRCUITPY (từ giờ sẽ lập trình và copy driver vào đây)
+
 
 ### 2. Install Required Libraries
 1. Download the `Adafruit_CircuitPython_MIDI` library from Adafruit | Tải thư viện tên như thế này vềề
