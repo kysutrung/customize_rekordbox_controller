@@ -1,0 +1,13 @@
+@file,1,CircuitPython Audio
+CFXParameterCH1,,KnobSlider,B001,,,,,,,,,,Fast;,
+CFXParameterCH2,,KnobSlider,B008,,,,,,,,,,Fast;,
+ChannelFader,,KnobSlider,,B00A,B009,,,,,,,,,
+EQHigh,,KnobSlider,,B004,B005,,,,,,,,Fast;,
+EQLow,,KnobSlider,,B002,B007,,,,,,,,Fast;,
+EQMid,,KnobSlider,,B003,B006,,,,,,,,Fast;,
+NoFunction,,Button,,803C,,,,,803C,,,,,
+NoFunction,,Button,,903C,,,,,903C,,,,,
+NoFunction,,KnobSlider,,B000,,,,,,,,,Fast;,
+NoFunction,,KnobSlider,,,B00B,,,,,,,,,
+NoFunction,,Button,,,,,,B006,,,,,,
+NoFunction,,Button,,,,,,,B008,,,,,
