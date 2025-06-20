@@ -1,6 +1,6 @@
 ![Photo01](https://github.com/kysutrung/customize_rekordbox_controller/blob/main/mediaaa/repo_cover.jpg)
 
-# DJ Controller for Rekordbox using Raspberry Pi Pico
+# DJ Controller for Rekordbox using Raspberry Pi Pico (KHÔNG DÙNG CHO REKOPI MIDI)
 # Bàn DJ điều khiển phần mềm Rekordbox sử dụng Raspberry Pi Pico
 
 ## Introduction | Giới thiệu
