@@ -26,9 +26,13 @@ SEGMENTS = {
     13: 0b00011100,
     14: 0b11001110,
     15: 0b01111100,
+    16: 0b01101110
 }
 
 MODE_VAR = 0
+
+# --- Ánh xạ MODE_VAR sang CC number cho biến trở đầu tiên ---
+CC_MAP = [20, 21, 22, 23, 24, 25, 26, 27, 28]
 
 # --- Shift Register ---
 class ShiftRegister:
@@ -102,18 +106,16 @@ buttons = [create_button(pin) for pin in button_pins]
 last_states = [True] * 8
 
 def mode_display(mode_num):
-    display = [(14, 13), (14, 0), (13, 0), (11, 15), (14, 10), (12, 1), (12, 2), (11, 12), (13, 14)]
+    display = [(14, 13), (14, 0), (13, 0), (16, 11), (14, 10), (12, 1), (12, 2), (11, 12), (13, 14)]
     left, right = display[mode_num] if mode_num < len(display) else (0, 0)
     display_number_on_led(2, left)
     display_number_on_led(3, right)
 
 def key_light_press(gpio_num):
-    if MODE_VAR == 4 or MODE_VAR == 0 or MODE_VAR ==3:
+    if MODE_VAR == 4 or MODE_VAR == 0 or MODE_VAR == 3:
         light_map = {0: 0, 1: 1, 2: 2, 3: 3, 4: 7, 5: 6, 6: 5, 7: 4}
         if gpio_num in light_map:
             light_ic1_led(light_map[gpio_num])
-            
-
 
 # --- Biến trở analog ---
 s0 = digitalio.DigitalInOut(board.GP15)
@@ -162,15 +164,17 @@ while True:
             send_midi_note_off(note)
         last_states[i] = current_state
 
-    # Đọc biến trở CD4051: channel 1–7 → CC 1–7
+    # Đọc biến trở CD4051: channel 1–7 → CC
     for i, ch in enumerate(range(1, 8)):
         select_channel(ch)
         time.sleep(0.002)
         raw = adc_mux.value
         midi_val = adc_to_midi(raw)
+
         if midi_val != last_values[i]:
-            midi.send(ControlChange(i + 1, midi_val))
-            print(f"MIDI CC {i+1}: {midi_val}")
+            cc_num = CC_MAP[MODE_VAR] if i == 0 else i + 1  # Chỉ biến trở đầu tiên thay đổi theo MODE_VAR
+            midi.send(ControlChange(cc_num, midi_val))
+            print(f"MIDI CC {cc_num}: {midi_val}")
             last_values[i] = midi_val
 
     # Biến trở trực tiếp → CC 8
