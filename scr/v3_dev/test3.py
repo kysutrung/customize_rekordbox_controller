@@ -24,7 +24,8 @@ SEGMENTS = {
     11: 0b10011100,
     12: 0b10001110,
     13: 0b00011100,
-    14: 0b11001110
+    14: 0b11001110,
+    15: 0b01111100,
 }
 
 MODE_VAR = 0
@@ -101,16 +102,18 @@ buttons = [create_button(pin) for pin in button_pins]
 last_states = [True] * 8
 
 def mode_display(mode_num):
-    display = [(14, 13), (14, 0), (13, 0), (14, 10), (12, 1), (12, 2), (11, 12), (13, 14)]
+    display = [(14, 13), (14, 0), (13, 0), (11, 15), (14, 10), (12, 1), (12, 2), (11, 12), (13, 14)]
     left, right = display[mode_num] if mode_num < len(display) else (0, 0)
     display_number_on_led(2, left)
     display_number_on_led(3, right)
 
 def key_light_press(gpio_num):
-    if MODE_VAR == 3:
+    if MODE_VAR == 4 or MODE_VAR == 0 or MODE_VAR ==3:
         light_map = {0: 0, 1: 1, 2: 2, 3: 3, 4: 7, 5: 6, 6: 5, 7: 4}
         if gpio_num in light_map:
             light_ic1_led(light_map[gpio_num])
+            
+
 
 # --- Biến trở analog ---
 s0 = digitalio.DigitalInOut(board.GP15)
@@ -137,11 +140,11 @@ for i in range(9):
 # --- Vòng lặp chính ---
 while True:
     mode_display(MODE_VAR)
-
+    
     # Xử lý chuyển chế độ
     pressed, last_mode_button_state = handle_button_press(mode_button, last_mode_button_state)
     if pressed:
-        MODE_VAR = (MODE_VAR + 1) % 8
+        MODE_VAR = (MODE_VAR + 1) % 9
         print("MODE_VAR =", MODE_VAR)
 
     # Xử lý nút nhấn
