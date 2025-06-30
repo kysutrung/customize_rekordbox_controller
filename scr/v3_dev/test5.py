@@ -32,7 +32,6 @@ def adc_to_midi(value):
 # --- Biến trở: Lưu giá trị MIDI trước đó ---
 last_values = [-1] * 9
 
-# --- Nút encoder mô phỏng (GP2 = trái, GP5 = phải) ---
 button_left = digitalio.DigitalInOut(board.GP5)
 button_right = digitalio.DigitalInOut(board.GP2)
 for button in [button_left, button_right]:
