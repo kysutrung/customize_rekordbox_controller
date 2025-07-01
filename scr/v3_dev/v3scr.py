@@ -73,10 +73,10 @@ def display_number_on_led(ic_index, number):
 # -------------------- MIDI và ADC --------------------
 midi = adafruit_midi.MIDI(midi_out=usb_midi.ports[1], out_channel=0)
 
-def send_midi_note_on(note, velocity=64):
+def send_midi_note_on(note, velocity=127):
     midi.send(NoteOn(note, velocity))
 
-def send_midi_note_off(note, velocity=64):
+def send_midi_note_off(note, velocity=0):
     midi.send(NoteOff(note, velocity))
 
 def adc_to_midi(value):
@@ -114,7 +114,7 @@ last_states = [True] * len(buttons)
 
 # GP mapping
 delta_button1 = buttons[0]  # GP0
-delta_button2 = buttons[2]  # GP2
+delta_button2 = buttons[3]  # GP2
 encoder_button_left = buttons[5]  # GP5
 encoder_button_right = buttons[2] # GP2 (dual function)
 
@@ -152,7 +152,7 @@ def key_light_press(gpio_num):
         
 def key_light_still():
     if MODE_VAR == 1:
-        light_ic1_leds([4, 6])
+        light_ic1_leds([4, 7])
     elif MODE_VAR == 2:
         light_ic1_leds([2, 4, 5, 6, 7])
     elif MODE_VAR == 8:
@@ -209,7 +209,7 @@ while True:
             b1 = not delta_button1.value
             b2 = not delta_button2.value
             cc1_value, ref_adc1, prev_button1 = handle_delta_control(raw, 1, cc1_value, ref_adc1, prev_button1, b1)
-            cc10_value, ref_adc10, prev_button2 = handle_delta_control(raw, 10, cc10_value, ref_adc10, prev_button2, b2)
+            cc10_value, ref_adc10, prev_button2 = handle_delta_control(raw, 30, cc10_value, ref_adc10, prev_button2, b2)
         elif midi_val != last_values[i]:
             cc = CC_MAP[MODE_VAR] if i == 0 else i + 1
             midi.send(ControlChange(cc, midi_val))
