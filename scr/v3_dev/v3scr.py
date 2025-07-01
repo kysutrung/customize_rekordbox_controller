@@ -120,7 +120,7 @@ encoder_button_right = buttons[2] # GP2 (dual function)
 
 # -------------------- Display chế độ --------------------
 def mode_display(mode):
-    pattern = [(14,13), (14,0), (13,0), (16,11), (14,10), (12,1), (12,2), (11,12), (13,14)]
+    pattern = [(14,13), (14,0), (13,0), (16,11), (14,10), (12,1), (13,14)]
     left, right = pattern[mode] if mode < len(pattern) else (0, 0)
     display_number_on_led(2, left)
     display_number_on_led(3, right)
@@ -155,7 +155,9 @@ def key_light_still():
         light_ic1_leds([4, 7])
     elif MODE_VAR == 2:
         light_ic1_leds([2, 4, 5, 6, 7])
-    elif MODE_VAR == 8:
+    elif MODE_VAR == 5:
+        light_ic1_leds([1, 2, 6])
+    elif MODE_VAR == 6:
         light_ic1_leds([0, 1, 2, 3, 4, 6])
     else:
         light_ic1_leds([8])
@@ -177,7 +179,7 @@ while True:
     # Xử lý chuyển chế độ
     pressed, last_mode_button_state = handle_button_press(mode_button, last_mode_button_state)
     if pressed:
-        MODE_VAR = (MODE_VAR + 1) % 9
+        MODE_VAR = (MODE_VAR + 1) % 7
         print(f">>> MODE_VAR = {MODE_VAR}")
 
     # Xử lý nút nhấn
@@ -194,7 +196,7 @@ while True:
                 note = get_note_number(MODE_VAR, i)
                 send_midi_note_off(note)
                 print(f"Note OFF: {note}")
-                if MODE_VAR != 1 and MODE_VAR !=2 and MODE_VAR != 8:
+                if MODE_VAR != 1 and MODE_VAR !=2 and MODE_VAR != 5 and MODE_VAR != 6:
                     light_ic1_led(9)
         last_states[i] = current
 
