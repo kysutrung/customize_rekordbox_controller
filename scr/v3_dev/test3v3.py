@@ -8,7 +8,7 @@ from adafruit_midi.note_on import NoteOn
 from adafruit_midi.note_off import NoteOff
 from adafruit_midi.control_change import ControlChange
 
-# -------------------- Cấu hình hiển thị LED 7 đoạn --------------------
+# --------------------LED 7--------------------
 SEGMENTS = {
     0: 0b11111100,  1: 0b01100000,  2: 0b11011010,  3: 0b11110010,
     4: 0b01100110,  5: 0b10110110,  6: 0b10111110,  7: 0b11100000,
@@ -17,7 +17,8 @@ SEGMENTS = {
     16: 0b01101110
 }
 
-# -------------------- Biến toàn cục --------------------
+# -------------------- biến toàn cục --------------------
+last_mode_var = -1
 MODE_VAR = 0
 CC_MAP = [20, 21, 22, 23, 24, 25, 26, 27, 28]
 last_values = [-1] * 9  # MIDI CC cache
@@ -30,7 +31,7 @@ prev_button1 = prev_button2 = True
 # Encoder State
 last_encoder_left = last_encoder_right = True
 
-# -------------------- Cấu hình Shift Register --------------------
+# -------------------- 74hc595 --------------------
 class ShiftRegister:
     def __init__(self, stcp, shcp, ds):
         self.latch = digitalio.DigitalInOut(stcp)
@@ -48,7 +49,6 @@ class ShiftRegister:
             self.clock.value = True
         self.latch.value = True
 
-# IC LED
 sr1 = ShiftRegister(board.GP19, board.GP20, board.GP21)
 sr2 = ShiftRegister(board.GP9, board.GP10, board.GP11)
 sr3 = ShiftRegister(board.GP16, board.GP17, board.GP18)
@@ -82,7 +82,7 @@ def send_midi_note_off(note, velocity=0):
 def adc_to_midi(value):
     return max(0, min(127, 127 - int((value / 65535) * 127)))
 
-# -------------------- Multiplexer --------------------
+# -------------------- cd4051 --------------------
 s0, s1, s2 = digitalio.DigitalInOut(board.GP15), digitalio.DigitalInOut(board.GP14), digitalio.DigitalInOut(board.GP13)
 for s in (s0, s1, s2):
     s.direction = digitalio.Direction.OUTPUT
@@ -94,7 +94,6 @@ adc_mux = AnalogIn(board.A0)
 adc_direct1 = AnalogIn(board.A1)
 adc_direct2 = AnalogIn(board.A2)
 
-# -------------------- Button & Mode --------------------
 def create_button(pin):
     btn = digitalio.DigitalInOut(pin)
     btn.direction = digitalio.Direction.INPUT
@@ -116,9 +115,9 @@ last_states = [True] * len(buttons)
 delta_button1 = buttons[0]  # GP0
 delta_button2 = buttons[3]  # GP2
 encoder_button_left = buttons[5]  # GP5
-encoder_button_right = buttons[2] # GP2 (dual function)
+encoder_button_right = buttons[2] # GP2
 
-# -------------------- Display chế độ --------------------
+# -------------------- chế độ --------------------
 def mode_display(mode):
     pattern = [(14,13), (14,0), (13,0), (16,11), (14,10), (12,1), (13,14)]
     left, right = pattern[mode] if mode < len(pattern) else (0, 0)
@@ -149,7 +148,6 @@ def key_light_press(gpio_num):
         mapping = {0: 0, 1: 1, 2: 2, 3: 3, 4: 7, 5: 6, 6: 5, 7: 4}
         light_ic1_led(mapping.get(gpio_num, 9))
         
-        
 def key_light_still():
     if MODE_VAR == 1:
         light_ic1_leds([4, 7])
@@ -162,27 +160,24 @@ def key_light_still():
     else:
         light_ic1_leds([8])
 
-last_mode_var = -1
+for u in range(3):
+    for i in range(4):
+        light_ic1_leds([i, i+4])
+        time.sleep(0.15)
 
-# -------------------- Khởi động --------------------
-for i in range(9):
-    light_ic1_led(i)
-    time.sleep(0.15)
-
-# -------------------- Main loop --------------------
 while True:
     # đèn đóm
     mode_display(MODE_VAR)
     if MODE_VAR != last_mode_var:
         key_light_still()
         last_mode_var = MODE_VAR
-    # Xử lý chuyển chế độ
+    # chuyển chế độ
     pressed, last_mode_button_state = handle_button_press(mode_button, last_mode_button_state)
     if pressed:
         MODE_VAR = (MODE_VAR + 1) % 7
         print(f">>> MODE_VAR = {MODE_VAR}")
 
-    # Xử lý nút nhấn
+    # nút nhấn
     for i, btn in enumerate(buttons):
         current = btn.value
         if not current and last_states[i]:
@@ -200,7 +195,7 @@ while True:
                     light_ic1_led(9)
         last_states[i] = current
 
-    # Đọc MUX (CC1–CC7)
+    # CC1–CC7
     for i, ch in enumerate(range(1, 8)):
         select_channel(ch)
         time.sleep(0.002)
@@ -218,7 +213,7 @@ while True:
             print(f"CC {cc} = {midi_val}")
             last_values[i] = midi_val
 
-    # Analog trực tiếp → CC8, CC9
+    # CC8 CC9
     for idx, adc, cc_num in [(7, adc_direct1, 8), (8, adc_direct2, 9)]:
         raw = adc.value
         midi_val = adc_to_midi(raw)
@@ -227,7 +222,7 @@ while True:
             print(f"CC {cc_num} = {midi_val}")
             last_values[idx] = midi_val
 
-    # Mô phỏng encoder khi MODE_VAR == 2
+    # encoder
     if MODE_VAR == 2:
         l_state = encoder_button_left.value
         r_state = encoder_button_right.value
