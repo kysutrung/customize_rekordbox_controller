@@ -23,7 +23,7 @@ Dự án hướng tới chế tạo ra một nhạc cụ điện tử điều kh
 This is electrical diagram | Về cơ bản các linh kiện được đấu như vậy:
 ![Photo01](https://github.com/kysutrung/customize_rekordbox_controller/blob/main/mediaaa/so_do_noi_day.png)
 
-
+![Photo04](https://github.com/kysutrung/customize_rekordbox_controller/blob/main/mediaaa/so_do_bien_tro_thanh.jpg)
 
 ## Software Requirements | Phần mềm
 - [CircuitPython](https://circuitpython.org/) installed on Raspberry Pi Pico
