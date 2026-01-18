@@ -24,6 +24,7 @@ This is electrical diagram | Về cơ bản các linh kiện được đấu nh�
 ![Photo01](https://github.com/kysutrung/customize_rekordbox_controller/blob/main/mediaaa/so_do_noi_day.png)
 
 
+
 ## Software Requirements | Phần mềm
 - [CircuitPython](https://circuitpython.org/) installed on Raspberry Pi Pico
 - [Adafruit MIDI Library](https://github.com/adafruit/Adafruit_CircuitPython_MIDI)
